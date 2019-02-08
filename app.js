@@ -33,7 +33,7 @@ app.post('/metric/:key', (req, res) => {
 
 // get all metrics
 app.get('/metric/:key/sum', (req, res) => {
-  if (db[req.params.key]){
+  if (!db[req.params.key]){
       res.status(500).send({'error': 'metric does not exist'})
   } else {
     res.status(200).send({'value': db[req.params.key]})
