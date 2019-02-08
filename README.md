@@ -21,14 +21,6 @@ npm install
 ```
 
 
-## Running the tests
-
-
-```
-mocha tests/test.js
-```
-
-
 ## Deployment
 
 To run the application:
