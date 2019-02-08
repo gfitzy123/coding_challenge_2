@@ -4,12 +4,20 @@
 let metrics =  {};
 
 //functions to reset datastore every hour
-function clearDatabase(){
+let clearDatabase = function() {
+    console.log('Clearing database.')
     metrics = {}
 }
 
-function timeToLive() {
-    setInterval(clearDatabase(), 1000 * 60 * 60);
+let timeToLive = function() {
+    //this will set the database to clear at every interval (hour)
+    clearDatabase()
+    let d = new Date();
+    let n = d.toLocaleTimeString();
+    //setInterval(function(){ clearDatabase() },  1000);
+    let hourInMilliseconds = 1000 * 60 * 60
+    console.log('Will clear database in: ', hourInMilliseconds, '..milliseconds.')
+    setInterval(function(){ clearDatabase() },  hourInMilliseconds);
 }
 
 //create a date
@@ -26,7 +34,9 @@ if (tomorrow.getMinutes() === 0) {
 
     //call the time to live function on the end of the hour
     let difference = tomorrow - new Date();
-    setTimeout(timeToLive, difference);
+    console.log('Setting TTL on database to..', difference)
+    setTimeout(function(){ timeToLive() }, difference);
+    //setTimeout(function(){ timeToLive() }, differnece);
 }
 
 
